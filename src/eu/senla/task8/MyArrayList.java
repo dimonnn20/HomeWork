@@ -11,6 +11,25 @@ public class MyArrayList <E> implements MyList <E> {
         this.myArray = new Object[DEFAULTSIZE];
     }
 
+    public MyArrayList(MyList<? extends E> col) {
+        Object[] temp = col.toArray();
+        if ((size = temp.length) != 0) {
+            if (col.getClass() == MyArrayList.class) {
+                myArray = temp;
+            } else {
+                for (int i = 0; i < size; i++) {
+                    myArray[i] = temp[i];
+                }
+            }
+        }
+    }
+    public MyArrayList (int capacity) {
+            if (capacity > 0) {
+                this.myArray = new Object[capacity];
+            } else System.out.println("Capacity is wrong");
+    }
+
+
     @Override
     public boolean add(E obj) {
         if (size == myArray.length) {
